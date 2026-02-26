@@ -1,0 +1,397 @@
+/* =========================================================
+   layout.css – Page-level layout structures:
+   Navbar, Hero, Sections, Banner, Footer.
+   ========================================================= */
+
+/* ---- Utility container ---- */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 var(--color-border);
+  transition: box-shadow var(--transition-base);
+}
+
+.navbar--scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  height: 64px;
+}
+
+/* Logo */
+.navbar__logo {
+  font-family: 'Great vibes', cursive;
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  font-style: normal;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Nav links */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  flex: 1;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Navbar right side */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-left: auto;
+}
+
+/* Hamburger button – hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--space-xs);
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+/* Hamburger → X state */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 64px; /* offset for fixed navbar */
+  
+
+  /* Hero background – uses a food-themed gradient as a placeholder.
+     Replace url() with an actual image path if available. */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(20, 10, 2, 0.55) 0%,
+      rgba(20, 10, 2, 0.3) 60%,
+      rgba(20, 10, 2, 0.7) 100%
+    ),
+    url('../UI2/BG.PNG')
+    center/cover no-repeat;
+}
+
+.hero__overlay {
+  /* Additional decorative gradient at the bottom */
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(10, 5, 0, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-xl);
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Search bar container sits below hero content */
+.hero__search {
+  position: relative;
+  z-index: 10;
+  margin-top: -30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: #fff;
+  border-radius: var(--radius-full);
+  width: 90%;
+  padding: var(--space-md) var(--space-xl);
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar__icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.search-bar__input {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.search-bar__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   SECTIONS (shared)
+   ========================================================= */
+.section {
+  padding-block: var(--space-3xl);
+}
+
+.section--light {
+  background: var(--color-bg-light);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text);
+}
+
+/* =========================================================
+   CATEGORIES GRID
+   ========================================================= */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* =========================================================
+   SPECIALS GRID
+   ========================================================= */
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* =========================================================
+   BANNER (New menu additions)
+   ========================================================= */
+.banner {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(20, 10, 2, 0.82) 0%,
+      rgba(20, 10, 2, 0.5) 100%
+    ),
+    url('../UI2/FT.PNG')
+    center/cover no-repeat;
+}
+
+.banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.banner__content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  padding-block: var(--space-3xl);
+}
+
+.banner__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  color: #fff;
+  margin-bottom: var(--space-md);
+  line-height: 1.25;
+}
+
+.banner__text {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-xl);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background: var(--color-dark);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+  position: relative;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+  padding-block: var(--space-3xl);
+}
+
+.footer__logo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  font-style: italic;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.footer__brand p {
+  line-height: 1.8;
+}
+
+.footer__col h4 {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.03em;
+}
+
+.footer__col ul li {
+  margin-bottom: var(--space-sm);
+}
+
+.footer__col ul a:hover {
+  color: var(--color-primary);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.social-links a:hover {
+  color: var(--color-primary);
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  padding-block: var(--space-lg);
+  font-size: 0.82rem;
+}
+
+/* Scroll-to-top button */
+.scroll-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(224, 123, 57, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  z-index: 200;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-top:hover {
+  transform: translateY(-3px);
+  background: var(--color-primary-dark);
+}

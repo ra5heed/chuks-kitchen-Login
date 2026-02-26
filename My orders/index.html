@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chuks Kitchen – Order Summary</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGATION BAR
+       - Logo on the left (script font)
+       - Nav links in the center
+       - Login CTA button on the right
+       - Hamburger icon collapses links on mobile
+  ====================================================== -->
+  <header class="navbar">
+    <div class="navbar__logo">Chuks Kitchen</div>
+
+    <!-- Hamburger button: only visible on small screens -->
+    <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar__links" id="navLinks">
+      <a href="#" class="navbar__link">Home</a>
+      <a href="#" class="navbar__link">Explore</a>
+      <a href="#" class="navbar__link navbar__link--active">My Orders</a>
+      <a href="#" class="navbar__link">Account</a>
+    </nav>
+
+    <a href="#" class="btn btn--primary navbar__cta">Login</a>
+  </header>
+
+  <!-- ======================================================
+       MAIN PAGE CONTENT
+       Contains the Order Summary card
+  ====================================================== -->
+  <main class="main">
+    <section class="order-card" aria-label="Order summary">
+
+      <!-- Card Title -->
+      <h1 class="order-card__title">Order Summary</h1>
+      <hr class="order-card__divider" />
+
+      <!-- ---------- PROMO CODE SECTION ---------- -->
+      <div class="promo">
+        <h2 class="promo__label">Add a Promo Code</h2>
+        <div class="promo__row">
+          <input
+            type="text"
+            class="promo__input"
+            id="promoInput"
+            placeholder="Enter Code here"
+            aria-label="Enter promo code"
+          />
+          <!-- In the mockup this button says "Login" (likely "Apply" in production) -->
+          <button class="btn btn--primary promo__btn" id="applyPromoBtn">Login</button>
+        </div>
+        <!-- JS will inject success/error feedback here -->
+        <p class="promo__feedback" id="promoFeedback" aria-live="polite"></p>
+      </div>
+
+      <!-- ---------- PRICE BREAKDOWN ---------- -->
+      <!--
+        data-key attributes let JavaScript update individual
+        line items without touching the HTML structure
+      -->
+      <ul class="price-list" aria-label="Price breakdown">
+        <li class="price-list__item">
+          <span>Subtotal</span>
+          <span id="subtotal">&#8358;9,200</span>
+        </li>
+        <li class="price-list__item">
+          <span>Delivery Fee</span>
+          <span id="deliveryFee">&#8358;500</span>
+        </li>
+        <li class="price-list__item">
+          <span>Service Fee</span>
+          <span id="serviceFee">&#8358;200</span>
+        </li>
+        <li class="price-list__item">
+          <span>Tax</span>
+          <span id="tax">&#8358;0</span>
+        </li>
+      </ul>
+
+      <!-- ---------- TOTAL ---------- -->
+      <div class="total">
+        <span class="total__label">Total</span>
+        <span class="total__amount" id="total">&#8358;9,900</span>
+      </div>
+
+      <!-- ---------- DELIVERY / PICK-UP TOGGLE ---------- -->
+      <!--
+        Clicking a button triggers JS to:
+        1. Swap the active class
+        2. Update the delivery fee line item
+        3. Recalculate the total
+      -->
+      <div class="delivery-toggle" role="group" aria-label="Choose fulfilment method">
+        <button
+          class="delivery-toggle__btn delivery-toggle__btn--active"
+          id="deliveryBtn"
+          data-mode="delivery"
+        >
+          Delivery
+        </button>
+        <button
+          class="delivery-toggle__btn"
+          id="pickupBtn"
+          data-mode="pickup"
+        >
+          Pick up
+        </button>
+      </div>
+
+      <!-- ---------- SPECIAL INSTRUCTIONS ---------- -->
+      <div class="instructions">
+        <h2 class="instructions__label">Special Instructions for Restaurant</h2>
+        <textarea
+          class="instructions__textarea"
+          id="specialInstructions"
+          rows="4"
+          placeholder="E.g no onion, food is too spicy, food is too hot hhhhhhhhhh&#10;food is tasty"
+          aria-label="Special instructions for the restaurant"
+        ></textarea>
+      </div>
+
+      <!-- ---------- CHECKOUT CTA ---------- -->
+      <button class="btn btn--primary btn--full" id="checkoutBtn">
+        Proceed to Checkout
+      </button>
+
+    </section>
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+       4-column grid: Brand | Quick Links | Contact | Social
+  ====================================================== -->
+  <footer class="footer">
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div class="footer__brand">
+        <p class="footer__logo">Chuks Kitchen</p>
+        <p class="footer__tagline">
+          Bringing the authentic flavors of Nigerian home cooking to your
+          table, with passion and care.
+        </p>
+      </div>
+
+      <!-- Quick Links column -->
+      <nav class="footer__col" aria-label="Footer quick links">
+        <h3 class="footer__heading">Quick Links</h3>
+        <a href="#" class="footer__link">Home</a>
+        <a href="#" class="footer__link">Explore</a>
+        <a href="#" class="footer__link">My Order</a>
+        <a href="#" class="footer__link">Account</a>
+        <a href="#" class="footer__link">Contact</a>
+      </nav>
+
+      <!-- Contact column -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Contact Us</h3>
+        <p class="footer__text">+234 801 234 5678</p>
+        <p class="footer__text">hello@chukskitchen.com</p>
+        <p class="footer__text">123 Taste Blvd, Lagos, Nigeria!</p>
+      </div>
+
+      <!-- Social Links column -->
+      <div class="footer__col">
+        <a href="#" class="footer__link">Facebook</a>
+        <a href="#" class="footer__link">Twitter</a>
+        <a href="#" class="footer__link">Linkedin</a>
+        <a href="#" class="footer__link">Instagram</a>
+      </div>
+
+    </div>
+
+    <!-- Copyright bar -->
+    <div class="footer__bottom">
+      <p class="footer__copy">&#169; 2020 Lift Media. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating scroll-to-top button (shown/hidden by JS based on scroll position) -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll back to top">&#8679;</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

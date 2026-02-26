@@ -1,0 +1,656 @@
+/* ============================================================
+   CHUKS KITCHEN – ORDER SUMMARY PAGE STYLES
+   File: styles.css
+
+   Table of Contents
+   -----------------
+   1.  CSS Custom Properties (Design Tokens)
+   2.  CSS Reset / Base
+   3.  Utility Classes
+   4.  Buttons
+   5.  Navigation Bar
+   6.  Main Layout
+   7.  Order Card
+   8.  Promo Code Section
+   9.  Price List
+   10. Total Row
+   11. Delivery Toggle
+   12. Special Instructions
+   13. Checkout CTA
+   14. Footer
+   15. Scroll-to-Top Button
+   16. Responsive – Tablet (≤768px)
+   17. Responsive – Mobile (≤480px)
+============================================================ */
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   Centralised values – change here to update everywhere.
+============================================================ */
+:root {
+  /* Brand colours */
+  --color-primary:       #e87d2e;   /* Orange – main brand accent         */
+  --color-primary-dark:  #cf6720;   /* Darker orange for hover states      */
+  --color-footer-bg:     #4a2e1a;   /* Dark brown footer background        */
+  --color-footer-text:   #d4b896;   /* Light tan text inside footer        */
+
+  /* Neutrals */
+  --color-bg:            #f0f2f5;   /* Page background                     */
+  --color-card:          #ffffff;   /* Card / surface background           */
+  --color-border:        #e0e0e0;   /* Borders and dividers                */
+  --color-text-primary:  #1a1a1a;   /* Main body text                      */
+  --color-text-muted:    #888888;   /* Secondary / placeholder text        */
+  --color-toggle-bg:     #d0d0d0;   /* Inactive toggle button background   */
+
+  /* Typography */
+  --font-script: 'Dancing Script', cursive;   /* Logo / brand name         */
+  --font-body:   'Lato', sans-serif;          /* All body / UI text        */
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* Border radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-pill: 50px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  /* Transition */
+  --transition: 0.2s ease;
+}
+
+
+/* ============================================================
+   2. CSS RESET / BASE
+   Normalise browser defaults for a consistent starting point.
+============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+main {
+  flex: 1; /* push footer to the bottom on short pages */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+}
+
+input,
+textarea {
+  font-family: var(--font-body);
+  outline: none;
+}
+
+
+/* ============================================================
+   3. UTILITY CLASSES
+============================================================ */
+
+/* Visually hidden (accessible but off-screen) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ============================================================
+   4. BUTTONS
+   Base .btn style + modifier classes
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+/* Primary – orange fill */
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+/* Full-width modifier (used for checkout button) */
+.btn--full {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+}
+
+
+/* ============================================================
+   5. NAVIGATION BAR
+============================================================ */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-xl);
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: var(--space-md);
+}
+
+/* Logo – script font, orange */
+.navbar__logo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+  margin-right: auto;
+}
+
+/* Nav links container */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.navbar__link {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  transition: color var(--transition);
+}
+
+.navbar__link:hover {
+  color: var(--color-primary);
+}
+
+
+
+/* CTA – reuses .btn--primary, slight left margin */
+.navbar__cta {
+  margin-left: var(--space-md);
+  flex-shrink: 0;
+}
+
+/* Hamburger icon (hidden on desktop) */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--space-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  order: 2; /* Place after logo on mobile */
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Animate hamburger → X when nav is open */
+.navbar__hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar__hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.navbar__hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ============================================================
+   6. MAIN LAYOUT
+   Centers the order card horizontally with comfortable padding.
+============================================================ */
+.main {
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ============================================================
+   7. ORDER CARD
+   White card container for all order summary content.
+============================================================ */
+.order-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-xl);
+  width: 100%;
+  max-width: 520px;  /* Matches the mockup width */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.order-card__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.order-card__divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-top: -var(--space-sm); /* tighten gap after title */
+}
+
+
+/* ============================================================
+   8. PROMO CODE SECTION
+============================================================ */
+.promo__label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+/* Row: input + button side-by-side */
+.promo__row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.promo__input {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-md);
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  transition: border-color var(--transition);
+}
+
+.promo__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.promo__input:focus {
+  border-color: var(--color-primary);
+}
+
+.promo__btn {
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+}
+
+/* Feedback text shown after applying promo code */
+.promo__feedback {
+  font-size: 0.85rem;
+  margin-top: var(--space-xs);
+  min-height: 18px; /* Prevent layout shift */
+}
+
+.promo__feedback--success {
+  color: #27ae60;
+}
+
+.promo__feedback--error {
+  color: #e74c3c;
+}
+
+
+/* ============================================================
+   9. PRICE LIST
+   Subtotal, fees, tax rows
+============================================================ */
+.price-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.price-list__item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   10. TOTAL ROW
+============================================================ */
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+}
+
+.total__label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.total__amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+
+/* ============================================================
+   11. DELIVERY / PICK-UP TOGGLE
+   Two-segment pill toggle
+============================================================ */
+.delivery-toggle {
+  display: flex;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background-color: var(--color-toggle-bg);
+}
+
+.delivery-toggle__btn {
+  flex: 1;
+  padding: 11px var(--space-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* Active segment – orange fill, white text */
+.delivery-toggle__btn--active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.delivery-toggle__btn:not(.delivery-toggle__btn--active):hover {
+  background-color: #b8b8b8;
+}
+
+
+/* ============================================================
+   12. SPECIAL INSTRUCTIONS
+============================================================ */
+.instructions__label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.instructions__textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color var(--transition);
+  line-height: 1.6;
+}
+
+.instructions__textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.instructions__textarea:focus {
+  border-color: var(--color-primary);
+}
+
+
+/* ============================================================
+   13. CHECKOUT CTA
+   Full-width orange button (styled via .btn--full --primary)
+   No additional rules needed here.
+============================================================ */
+
+
+/* ============================================================
+   14. FOOTER
+============================================================ */
+.footer {
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  padding: var(--space-2xl) var(--space-xl) var(--space-md);
+  margin-top: auto;
+}
+
+/* 4-column grid, collapses on smaller screens */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr;
+  gap: var(--space-xl);
+  max-width: 1100px;
+  margin: 0 auto var(--space-xl);
+}
+
+/* Brand column */
+.footer__logo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.footer__tagline {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 220px;
+}
+
+/* Generic footer column */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer__heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: var(--space-sm);
+}
+
+.footer__link {
+  font-size: 0.88rem;
+  color: var(--color-footer-text);
+  transition: color var(--transition);
+}
+
+.footer__link:hover {
+  color: var(--color-primary);
+}
+
+.footer__text {
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+/* Copyright bar */
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-md);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* ============================================================
+   15. SCROLL-TO-TOP BUTTON
+   Floating circle in the bottom-right corner.
+   Visibility is controlled by JavaScript (adds .is-visible).
+============================================================ */
+.scroll-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 200;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-top:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   16. RESPONSIVE – TABLET (max-width: 768px)
+============================================================ */
+@media (max-width: 768px) {
+
+  /* Navbar: show hamburger, hide desktop links */
+  .navbar {
+    flex-wrap: wrap;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .navbar__hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  /* Hide the CTA button on mobile nav bar to save space */
+  .navbar__cta {
+    display: none;
+  }
+
+  /* Nav links stack vertically, hidden by default */
+  .navbar__links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-md) 0;
+    border-top: 1px solid var(--color-border);
+    order: 3; /* Below logo row */
+  }
+
+  /* JS adds .is-open to reveal the menu */
+  .navbar__links.is-open {
+    display: flex;
+  }
+
+  /* Footer: collapse to 2-column grid */
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* Brand spans full width in 2-col grid */
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* ============================================================
+   17. RESPONSIVE – MOBILE (max-width: 480px)
+============================================================ */
+@media (max-width: 480px) {
+
+  /* Tighter card padding */
+  .order-card {
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+  }
+
+  /* Single-column footer */
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Scroll-to-top closer to the edge on small screens */
+  .scroll-top {
+    right: var(--space-md);
+    bottom: var(--space-md);
+  }
+}

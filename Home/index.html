@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chuks Kitchen – The Heart of Nigerian Home Cooking</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheets (order matters) -->
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo">Chuks Kitchen</a>
+
+      <!-- Desktop nav links -->
+      <nav class="navbar__links" id="navLinks">
+        <a href="/Home/index.html" class="nav-link active">Home</a>
+        <a href="#categories" class="nav-link">Explore</a>
+        <a href="/My orders/index.html" class="nav-link">My Orders</a>
+        <a href="#" class="nav-link">Account</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="btn btn--primary">Login</button>
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="hero__overlay"></div>
+      <!-- Background image via CSS -->
+      <div class="hero__content container">
+        <h1 class="hero__title">The Heart of Nigerian<br/>Home Cooking</h1>
+        <p class="hero__subtitle">Handcrafted with passion, delivered with care.</p>
+        <button class="btn btn--primary">Discover what's new</button>
+      </div>
+
+      <!-- Search bar -->
+      <div class="hero__search container">
+        <div class="search-bar">
+          <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="text"
+            class="search-bar__input"
+            placeholder="What are you craving for today?"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== POPULAR CATEGORIES ===================== -->
+    <section class="section" id="categories">
+      <div class="container">
+        <h2 class="section__title">Popular Categories</h2>
+
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CHEF'S SPECIALS ===================== -->
+    <section class="section section--light" id="specials">
+      <div class="container">
+        <h2 class="section__title">Chef's Specials</h2>
+
+        <div class="specials-grid" id="specialsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEW MENU BANNER ===================== -->
+    <section class="banner">
+      <div class="banner__overlay"></div>
+      <div class="banner__content container">
+        <h2 class="banner__title">Introducing Our New Menu Additions!</h2>
+        <p class="banner__text">
+          Explore exciting new dishes, crafted with the freshest ingredients and
+          authentic Nigerian flavors. Limited time offer!
+        </p>
+        <button class="btn btn--primary">Discover what's new</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <!-- Brand -->
+      <div class="footer__brand">
+        <span class="footer__logo">Chuks Kitchen</span>
+        <p>
+          Bringing the authentic flavors of Nigerian home cooking to your
+          table, with passion and care.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Explore</a></li>
+          <li><a href="#">My Orders</a></li>
+          <li><a href="#">Account</a></li>
+          <li><a href="#">Cart</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer__col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>+234 012 345 6789</li>
+          <li>hello@chefskitchen.com</li>
+          <li>123 Yamba Blvd, Lagos, Nigeria</li>
+        </ul>
+      </div>
+
+      <!-- Socials -->
+      <div class="footer__col footer__socials">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Twitter">Twitter</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2025 Chuks Kitchen. All rights reserved.</p>
+    </div>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/data.js"></script>
+  <script src="./js/render.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

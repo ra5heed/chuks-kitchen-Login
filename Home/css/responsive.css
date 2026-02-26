@@ -1,0 +1,132 @@
+/* =========================================================
+   responsive.css – Mobile-first breakpoints.
+   Breakpoints:
+     - < 768px   → mobile (single column)
+     - 768–1023px → tablet (2 columns)
+     - 1024px+   → desktop (default styles in other files)
+   ========================================================= */
+
+/* =========================================================
+   TABLET  (max-width: 1023px)
+   ========================================================= */
+@media (max-width: 1023px) {
+
+  /* Footer: 2 columns */
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* Categories: 2 columns */
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Specials: 2 columns */
+  .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   MOBILE  (max-width: 767px)
+   ========================================================= */
+@media (max-width: 767px) {
+
+  /* ---- Navbar ---- */
+  .navbar__links {
+    /* Hide desktop nav; show via JS hamburger toggle */
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  /* When hamburger is toggled open, show nav */
+  .navbar__links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1rem;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    min-height: 420px;
+  }
+
+  .hero__title {
+    font-size: 1.8rem;
+  }
+
+  .search-bar {
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  /* ---- Grids → single column ---- */
+  .categories-grid {
+    grid-template-columns: 1fr 1fr;  /* keep 2-col on large phones */
+    gap: var(--space-md);
+  }
+
+  .specials-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* ---- Banner ---- */
+  .banner__title {
+    font-size: 1.5rem;
+  }
+
+  /* ---- Footer ---- */
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* ---- Scroll to top ---- */
+  .scroll-top {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES  (max-width: 400px)
+   ========================================================= */
+@media (max-width: 400px) {
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__content,
+  .hero__search {
+    padding-inline: var(--space-md);
+  }
+
+  .container {
+    padding-inline: var(--space-md);
+  }
+}
